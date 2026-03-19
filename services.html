@@ -1,0 +1,231 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>CutLab — Our Services</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+  :root{--black:#0a0a0a;--white:#f5f0e8;--cream:#ede8df;--orange:#ff4d00;--orange-dim:#c93c00;--gray:#2a2a2a}
+  *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+  html{scroll-behavior:smooth}
+  body{background:var(--black);color:var(--white);font-family:'DM Sans',sans-serif;font-weight:300;overflow-x:hidden;}
+  html{scroll-padding-top:80px} nav{position:fixed;top:0;left:0;right:0;display:flex;align-items:center;justify-content:space-between;padding:20px 48px;z-index:100;background:rgba(10,10,10,.85);backdrop-filter:blur(10px)}
+  .logo{font-family:'Bebas Neue',sans-serif;font-size:2rem;letter-spacing:.12em;color:var(--white);text-decoration:none}
+  .logo span{color:var(--orange)}
+  .nav-links{display:flex;align-items:center;gap:32px}
+  .nav-links a{font-size:.78rem;letter-spacing:.14em;text-transform:uppercase;color:#888;text-decoration:none;transition:color .2s}
+  .nav-links a:hover,.nav-links a.active{color:var(--white)}
+  nav a.cta-sm{font-size:.78rem;letter-spacing:.18em;text-transform:uppercase;color:var(--orange);text-decoration:none;border:1px solid var(--orange);padding:8px 20px;transition:background .2s,color .2s}
+  nav a.cta-sm:hover{background:var(--orange);color:var(--black)}
+
+  .page-hero{padding:160px 48px 80px;border-bottom:1px solid rgba(255,255,255,.06)}
+  .eyebrow{font-size:.72rem;letter-spacing:.28em;text-transform:uppercase;color:var(--orange);margin-bottom:20px}
+  h1{font-family:'Bebas Neue',sans-serif;font-size:clamp(4rem,8vw,8rem);line-height:.92;color:var(--white)}
+  h1 .accent{color:var(--orange)}
+  .page-sub{margin-top:24px;font-size:1rem;line-height:1.7;color:#888;max-width:500px}
+
+  .section-label{font-size:.7rem;letter-spacing:.3em;text-transform:uppercase;color:var(--orange);margin-bottom:16px}
+  .section-title{font-family:'Bebas Neue',sans-serif;font-size:clamp(2rem,4vw,4rem);line-height:1;letter-spacing:.04em}
+
+  /* SERVICE BLOCKS */
+  .service-block{padding:100px 48px;border-bottom:1px solid rgba(255,255,255,.06);display:grid;grid-template-columns:1fr 1fr;gap:80px;align-items:center}
+  .service-block:nth-child(even) .service-visual{order:-1}
+  .service-block h3{font-family:'Bebas Neue',sans-serif;font-size:clamp(2rem,3.5vw,3.5rem);line-height:1;margin-bottom:20px}
+  .service-block p{font-size:.9rem;line-height:1.8;color:#888;margin-bottom:24px}
+  .service-tag{display:inline-block;font-size:.7rem;letter-spacing:.16em;text-transform:uppercase;border:1px solid rgba(255,77,0,.4);color:var(--orange);padding:4px 12px;margin:0 4px 8px 0}
+  .tags{margin-bottom:28px}
+  .cta-link{display:inline-block;background:var(--orange);color:white;font-family:'Bebas Neue',sans-serif;font-size:1rem;letter-spacing:.14em;padding:12px 28px;text-decoration:none;transition:background .2s}
+  .cta-link:hover{background:var(--orange-dim)}
+
+  /* SLIDER */
+  .slider-wrap{position:relative;aspect-ratio:16/9;overflow:hidden;cursor:ew-resize;border:1px solid rgba(255,255,255,.08);user-select:none}
+  .slider-wrap img{position:absolute;top:0;left:0;width:100%;height:100%;object-fit:cover;pointer-events:none}
+  .img-after{clip-path:inset(0 50% 0 0)}
+  .divider-line{position:absolute;top:0;left:50%;transform:translateX(-50%);width:3px;height:100%;background:var(--orange);pointer-events:none;z-index:10}
+  .divider-handle{position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);width:40px;height:40px;border-radius:50%;background:var(--orange);display:flex;align-items:center;justify-content:center;pointer-events:none;box-shadow:0 0 16px rgba(255,77,0,.5)}
+  .divider-handle svg{width:18px;height:18px}
+  .slide-label{position:absolute;bottom:12px;font-family:'Bebas Neue',sans-serif;font-size:.9rem;letter-spacing:.14em;padding:5px 12px;background:rgba(0,0,0,.6);backdrop-filter:blur(8px);pointer-events:none;z-index:5}
+  .slide-before{left:12px;color:#888}
+  .slide-after{right:12px;color:var(--orange)}
+  .slider-hint{margin-top:10px;font-size:.72rem;color:#444;letter-spacing:.1em;text-transform:uppercase;text-align:center}
+
+  /* MOTION GRAPHICS GRID */
+  .motion-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:2px}
+  .motion-card{aspect-ratio:16/9;background:var(--gray);position:relative;overflow:hidden;display:flex;align-items:center;justify-content:center}
+  .motion-card-inner{text-align:center;padding:20px}
+  .motion-icon{font-size:2.5rem;margin-bottom:12px}
+  .motion-name{font-family:'Bebas Neue',sans-serif;font-size:1rem;letter-spacing:.1em;color:var(--white)}
+  .motion-desc{font-size:.75rem;color:#666;margin-top:6px}
+  .motion-card::before{content:'';position:absolute;inset:0;background:linear-gradient(135deg,#111,#222);z-index:0}
+  .motion-card-inner{position:relative;z-index:1}
+  .motion-card:hover::before{background:linear-gradient(135deg,#1a0a00,#331500)}
+
+  /* EDITING VISUAL */
+  .editing-visual{background:var(--gray);aspect-ratio:16/9;position:relative;overflow:hidden;display:flex;align-items:flex-end}
+  .timeline-mock{width:100%;padding:16px;background:rgba(0,0,0,.7)}
+  .tl-row{height:20px;background:rgba(255,77,0,.3);margin-bottom:4px;border-radius:2px;position:relative;overflow:hidden}
+  .tl-row::after{content:'';position:absolute;top:0;left:0;height:100%;width:30%;background:var(--orange);opacity:.6}
+  .tl-row:nth-child(2)::after{width:60%;opacity:.4}
+  .tl-row:nth-child(3)::after{width:45%;background:#4a9eff;opacity:.5}
+  .tl-row:nth-child(4){height:12px}
+  .tl-row:nth-child(4)::after{width:80%;background:#4a9eff;opacity:.3}
+  .editing-overlay{position:absolute;top:20px;left:20px;font-family:'Bebas Neue',sans-serif;font-size:.85rem;letter-spacing:.12em;color:var(--orange);background:rgba(0,0,0,.6);padding:6px 12px}
+
+  footer{border-top:1px solid rgba(255,255,255,.07);padding:40px 48px;display:flex;align-items:center;justify-content:space-between;font-size:.75rem;color:#555;letter-spacing:.06em}
+  footer .logo{font-size:1.4rem}
+  .impressum{font-size:.7rem;color:#333;text-align:center;padding:16px 48px;border-top:1px solid rgba(255,255,255,.04)}
+  .impressum a{color:#555;text-decoration:none}
+
+  @media(max-width:900px){
+    nav{padding:20px 24px}.nav-links{display:none}
+    .page-hero{padding:120px 24px 60px}
+    .service-block{grid-template-columns:1fr;padding:60px 24px;gap:40px}
+    .service-block:nth-child(even) .service-visual{order:0}
+    .motion-grid{grid-template-columns:1fr 1fr}
+    footer{padding:32px 24px;flex-direction:column;gap:12px;text-align:center}
+  }
+</style>
+</head>
+<body>
+
+<nav>
+  <a class="logo" href="index.html">CUT<span>LAB</span></a>
+    <div class="nav-links">
+    <a href="index.html">Home</a>
+    <a href="services.html" class="active">Services</a>
+    <a href="team.html">Our Team</a>
+    <a href="careers.html">Careers</a>
+    <a href="index.html#contact">Contact</a>
+  </div>
+  <a class="cta-sm" href="index.html#contact">Get Started</a>
+</nav>
+
+<div class="page-hero">
+  <p class="eyebrow">Our Services</p>
+  <h1>WHAT WE <span class="accent">DO.</span></h1>
+  <p class="page-sub">From raw footage to cinematic final cuts — we handle every format, every style, every deadline.</p>
+</div>
+
+<!-- YOUTUBE -->
+<section class="service-block" id="youtube">
+  <div class="service-copy">
+    <p class="section-label">Service 01</p>
+    <h3>YOUTUBE &amp; LONG-FORM</h3>
+    <div class="tags">
+      <span class="service-tag">YouTube</span>
+      <span class="service-tag">Podcasts</span>
+      <span class="service-tag">Documentaries</span>
+      <span class="service-tag">Interviews</span>
+    </div>
+    <p>We cut full-length YouTube videos that keep viewers watching. Jump cuts, B-roll integration, chapter markers, sound design, and colour grading — all included. One dedicated editor per channel so your style stays consistent.</p>
+    <a href="index.html#contact" class="cta-link">START A PROJECT &rarr;</a>
+  </div>
+  <div class="service-visual">
+    <div class="service-visual">
+      <div style="position:relative;aspect-ratio:9/16;overflow:hidden;max-height:500px">
+        <img src="pro-editor.jpg" alt="Professional Video Editor" style="width:100%;height:100%;object-fit:cover;opacity:.85" loading="lazy" />
+        <div style="position:absolute;inset:0;background:linear-gradient(180deg,transparent 60%,var(--black) 100%)"></div>
+        <div style="position:absolute;bottom:20px;left:20px;font-family:'Bebas Neue',sans-serif;font-size:.85rem;letter-spacing:.12em;color:var(--orange);background:rgba(0,0,0,.6);padding:6px 12px">▶ YOUR EDITOR AT WORK</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- SHORT FORM -->
+<section class="service-block" id="shortform">
+  <div class="service-visual">
+    <div style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:4px">
+      <div style="aspect-ratio:9/16;background:var(--gray);position:relative;overflow:hidden"><div style="position:absolute;inset:0;background:linear-gradient(180deg,#111,#2a1000)"></div><div style="position:absolute;bottom:12px;left:0;right:0;text-align:center;font-family:'Bebas Neue',sans-serif;font-size:.8rem;letter-spacing:.1em;color:var(--orange)">REEL</div></div>
+      <div style="aspect-ratio:9/16;background:var(--gray);position:relative;overflow:hidden"><div style="position:absolute;inset:0;background:linear-gradient(180deg,#0a1520,#102040)"></div><div style="position:absolute;bottom:12px;left:0;right:0;text-align:center;font-family:'Bebas Neue',sans-serif;font-size:.8rem;letter-spacing:.1em;color:#4a9eff">SHORT</div></div>
+      <div style="aspect-ratio:9/16;background:var(--gray);position:relative;overflow:hidden"><div style="position:absolute;inset:0;background:linear-gradient(180deg,#150a20,#301050)"></div><div style="position:absolute;bottom:12px;left:0;right:0;text-align:center;font-family:'Bebas Neue',sans-serif;font-size:.8rem;letter-spacing:.1em;color:#a060ff">TIKTOK</div></div>
+    </div>
+  </div>
+  <div class="service-copy">
+    <p class="section-label">Service 02</p>
+    <h3>REELS, SHORTS &amp; TIKTOK</h3>
+    <div class="tags">
+      <span class="service-tag">Instagram Reels</span>
+      <span class="service-tag">YouTube Shorts</span>
+      <span class="service-tag">TikTok</span>
+    </div>
+    <p>Hook-driven short-form edits that stop the scroll. We handle pacing, captions, sound effects, music sync, and trending formats — so your clips perform, not just look good.</p>
+    <a href="index.html#contact" class="cta-link">START A PROJECT &rarr;</a>
+  </div>
+</section>
+
+<!-- COLOUR GRADING -->
+<section class="service-block" id="grading">
+  <div class="service-copy">
+    <p class="section-label">Service 03</p>
+    <h3>COLOUR GRADING</h3>
+    <div class="tags">
+      <span class="service-tag">Cinematic Look</span>
+      <span class="service-tag">Custom LUTs</span>
+      <span class="service-tag">Orange &amp; Teal</span>
+      <span class="service-tag">Brand Colours</span>
+    </div>
+    <p>Raw footage looks flat. Graded footage looks intentional. We apply film-grade colour correction and creative grading to give your content a signature cinematic look. Drag the slider to see the difference.</p>
+    <a href="index.html#contact" class="cta-link">START A PROJECT &rarr;</a>
+  </div>
+  <div class="service-visual">
+    <div class="slider-wrap" id="slider">
+      <img src="before.jpg" alt="Before" />
+      <img src="after.jpg" alt="After" class="img-after" id="afterImg" />
+      <div class="divider-line" id="divider">
+        <div class="divider-handle">
+          <svg viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2.5" stroke-linecap="round"><path d="M8 5l-7 7 7 7M16 5l7 7-7 7"/></svg>
+        </div>
+      </div>
+      <span class="slide-label slide-before">BEFORE</span>
+      <span class="slide-label slide-after">AFTER</span>
+    </div>
+    <p class="slider-hint">← Drag to compare →</p>
+  </div>
+</section>
+
+<!-- MOTION GRAPHICS -->
+<section class="service-block" id="motion">
+  <div class="service-visual">
+    <div class="motion-grid">
+      <div class="motion-card"><div class="motion-card-inner"><div class="motion-icon">✦</div><div class="motion-name">Animated Titles</div><div class="motion-desc">Cinematic intros &amp; outros</div></div></div>
+      <div class="motion-card"><div class="motion-card-inner"><div class="motion-icon">▼</div><div class="motion-name">Lower Thirds</div><div class="motion-desc">Name &amp; info overlays</div></div></div>
+      <div class="motion-card"><div class="motion-card-inner"><div class="motion-icon">⟶</div><div class="motion-name">Transitions</div><div class="motion-desc">Smooth scene changes</div></div></div>
+      <div class="motion-card"><div class="motion-card-inner"><div class="motion-icon">●</div><div class="motion-name">Bullet Points</div><div class="motion-desc">Animated list reveals</div></div></div>
+      <div class="motion-card"><div class="motion-card-inner"><div class="motion-icon">📊</div><div class="motion-name">Data Visuals</div><div class="motion-desc">Charts &amp; infographics</div></div></div>
+      <div class="motion-card"><div class="motion-card-inner"><div class="motion-icon">🎬</div><div class="motion-name">Full Packages</div><div class="motion-desc">Complete brand kit</div></div></div>
+    </div>
+  </div>
+  <div class="service-copy">
+    <p class="section-label">Service 04</p>
+    <h3>MOTION GRAPHICS</h3>
+    <div class="tags">
+      <span class="service-tag">Animated Titles</span>
+      <span class="service-tag">Lower Thirds</span>
+      <span class="service-tag">Transitions</span>
+      <span class="service-tag">Icon Animations</span>
+    </div>
+    <p>Motion graphics turn good videos into great ones. We create animated titles, transitions, bullet point reveals, and full brand packages — all matching your channel's style.</p>
+    <a href="index.html#contact" class="cta-link">START A PROJECT &rarr;</a>
+  </div>
+</section>
+
+<footer>
+  <a class="logo" href="index.html">CUT<span style="color:var(--orange)">LAB</span></a>
+  <p>&copy; 2026 CutLab. All rights reserved.</p>
+  <p><a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="92faf7fefefdd2f1e7e6fef3f0bce1e6e7f6fbfd">[email&#160;protected]</a></p>
+</footer>
+<div class="impressum">
+  <strong>Impressum:</strong> Maximilian Klöckner &bull; München, Deutschland &bull; <a href="/cdn-cgi/l/email-protection#85ede0e9e9eac5e6f0f1e9e4e7abf6f1f0e1ecea"><span class="__cf_email__" data-cfemail="85ede0e9e9eac5e6f0f1e9e4e7abf6f1f0e1ecea">[email&#160;protected]</span></a>
+</div>
+
+<script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script>
+var slider=document.getElementById('slider'),afterImg=document.getElementById('afterImg'),divider=document.getElementById('divider'),dragging=false;
+function setPos(x){var r=slider.getBoundingClientRect(),p=Math.min(Math.max((x-r.left)/r.width,0.02),0.98);afterImg.style.clipPath='inset(0 '+((1-p)*100).toFixed(1)+'% 0 0)';divider.style.left=(p*100).toFixed(1)+'%';}
+slider.addEventListener('mousedown',function(e){dragging=true;setPos(e.clientX);});
+window.addEventListener('mousemove',function(e){if(dragging)setPos(e.clientX);});
+window.addEventListener('mouseup',function(){dragging=false;});
+slider.addEventListener('touchstart',function(e){dragging=true;setPos(e.touches[0].clientX);},{passive:true});
+window.addEventListener('touchmove',functi

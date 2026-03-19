@@ -1,0 +1,614 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>CutLab — Professional Video Editing</title>
+<meta name="description" content="CutLab is a professional video editing service for YouTubers, content creators, and brands. Fast delivery, dedicated editor, colour grading included.">
+<meta name="theme-color" content="#0a0a0a">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+  :root{--black:#0a0a0a;--white:#f5f0e8;--cream:#ede8df;--orange:#ff4d00;--orange-dim:#c93c00;--gray:#2a2a2a;--gray2:#1a1a1a}
+  *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+  html{scroll-behavior:smooth}
+  body{background:var(--black);color:var(--white);font-family:'DM Sans',sans-serif;font-weight:300;overflow-x:hidden;}
+
+  /* NAV */
+  nav{position:fixed;top:0;left:0;right:0;display:flex;align-items:center;justify-content:space-between;padding:20px 48px;z-index:100;background:rgba(10,10,10,.9);backdrop-filter:blur(12px);border-bottom:1px solid rgba(255,255,255,.05)}
+  .logo{font-family:'Bebas Neue',sans-serif;font-size:2rem;letter-spacing:.12em;color:var(--white);text-decoration:none}
+  .logo span{color:var(--orange)}
+  .nav-links{display:flex;align-items:center;gap:32px}
+  .nav-links a{font-size:.78rem;letter-spacing:.14em;text-transform:uppercase;color:#888;text-decoration:none;transition:color .2s;position:relative}
+  .nav-links a:hover,.nav-links a.active{color:var(--white)}
+  nav a.cta-sm{font-size:.78rem;letter-spacing:.18em;text-transform:uppercase;color:var(--orange);text-decoration:none;border:1px solid var(--orange);padding:8px 20px;transition:background .2s,color .2s}
+  nav a.cta-sm:hover{background:var(--orange);color:var(--black)}
+
+  /* HERO */
+  .hero{min-height:100vh;display:grid;grid-template-columns:1fr 1fr;overflow:hidden}
+  .hero-left{display:flex;flex-direction:column;justify-content:flex-end;padding:140px 48px 80px;z-index:2}
+  .eyebrow{font-size:.72rem;letter-spacing:.28em;text-transform:uppercase;color:var(--orange);margin-bottom:28px;opacity:0;animation:fadeUp .7s .2s forwards}
+  h1{font-family:'Bebas Neue',sans-serif;font-size:clamp(5rem,9vw,9rem);line-height:.92;color:var(--white);opacity:0;animation:fadeUp .7s .4s forwards}
+  h1 .accent{color:var(--orange);display:block}
+  .hero-sub{margin-top:36px;font-size:1.05rem;line-height:1.7;color:#a09990;max-width:400px;opacity:0;animation:fadeUp .7s .6s forwards}
+  .hero-cta{margin-top:40px;opacity:0;animation:fadeUp .7s .8s forwards;display:flex;gap:16px;align-items:center;flex-wrap:wrap}
+  .btn-primary{background:var(--orange);color:white;font-family:'Bebas Neue',sans-serif;font-size:1.1rem;letter-spacing:.14em;padding:14px 32px;text-decoration:none;transition:background .2s}
+  .btn-primary:hover{background:var(--orange-dim)}
+  .btn-secondary{color:var(--white);font-size:.82rem;letter-spacing:.1em;text-decoration:none;border-bottom:1px solid rgba(255,255,255,.3);padding-bottom:2px;transition:border-color .2s,color .2s}
+  .btn-secondary:hover{border-color:var(--orange);color:var(--orange)}
+  .hero-stats{margin-top:48px;display:flex;gap:40px;opacity:0;animation:fadeUp .7s 1s forwards}
+  .stat-num{font-family:'Bebas Neue',sans-serif;font-size:2.5rem;color:var(--orange);line-height:1}
+  .stat-label{font-size:.72rem;letter-spacing:.1em;text-transform:uppercase;color:#666;margin-top:4px}
+  .hero-right{position:relative;overflow:hidden;background:var(--gray)}
+  .hero-img{width:100%;height:100%;object-fit:cover;opacity:.6}
+  .hero-right-overlay{position:absolute;inset:0;background:linear-gradient(90deg,var(--black) 0%,transparent 40%)}
+  .reel-stack{position:absolute;inset:0;display:flex;align-items:center;justify-content:center}
+  .reel-frame{position:absolute;width:340px;height:220px;border:1px solid rgba(255,255,255,.06);background:var(--black);overflow:hidden}
+  .reel-frame:nth-child(1){transform:rotate(-6deg) translate(-60px,40px);opacity:.5}
+  .reel-frame:nth-child(2){transform:rotate(3deg) translate(50px,-30px);opacity:.65;z-index:1}
+  .reel-frame:nth-child(3){transform:rotate(-1deg) translate(-10px,-10px);opacity:1;z-index:2}
+  .reel-frame .bar{height:4px;background:var(--orange)}
+  .reel-frame .bar-thin{height:2px;background:rgba(255,77,0,.4);margin-top:8px;width:60%}
+  .reel-inner{padding:20px;display:grid;gap:8px;grid-template-columns:1fr 1fr 1fr;margin-top:12px}
+  .thumb{aspect-ratio:16/9;background:var(--gray);position:relative;overflow:hidden}
+  .thumb::after{content:'';position:absolute;inset:0;background:linear-gradient(135deg,#1a1a1a,#333)}
+  .thumb:nth-child(2n)::after{background:linear-gradient(135deg,#1c1008,#3d2010)}
+  .thumb:nth-child(3n)::after{background:linear-gradient(135deg,#0a0f1a,#102040)}
+  .scanline{position:absolute;top:50%;width:100%;height:2px;background:linear-gradient(90deg,transparent,var(--orange),transparent);animation:scan 3s ease-in-out infinite;z-index:3}
+  @keyframes scan{0%{top:-10%;opacity:1}100%{top:110%;opacity:0}}
+
+  /* MARQUEE */
+  .marquee-wrap{overflow:hidden;border-top:1px solid rgba(255,255,255,.08);border-bottom:1px solid rgba(255,255,255,.08);padding:18px 0;background:var(--gray2)}
+  .marquee-track{display:flex;white-space:nowrap;animation:marquee 20s linear infinite}
+  .marquee-track span{font-family:'Bebas Neue',sans-serif;font-size:1.1rem;letter-spacing:.18em;color:rgba(255,255,255,.2);padding:0 40px}
+  .marquee-track span.hi{color:var(--orange)}
+  @keyframes marquee{from{transform:translateX(0)}to{transform:translateX(-50%)}}
+
+  /* SERVICES */
+  .services{padding:120px 48px;display:grid;grid-template-columns:1fr 2fr;gap:80px;align-items:start}
+  .section-label{font-size:.7rem;letter-spacing:.3em;text-transform:uppercase;color:var(--orange);margin-bottom:20px}
+  .section-title{font-family:'Bebas Neue',sans-serif;font-size:clamp(2.5rem,4vw,4.5rem);line-height:1;letter-spacing:.04em}
+  .services-grid{display:grid;grid-template-columns:1fr 1fr;gap:2px}
+  .service-card{padding:40px 36px;background:var(--gray2);position:relative;overflow:hidden;transition:background .25s;text-decoration:none;color:var(--white);display:block}
+  .service-card:hover{background:#222}
+  .service-card::before{content:'';position:absolute;top:0;left:0;width:3px;height:0;background:var(--orange);transition:height .3s}
+  .service-card:hover::before{height:100%}
+  .service-num{font-family:'Bebas Neue',sans-serif;font-size:3.5rem;color:rgba(255,255,255,.05);margin-bottom:20px;transition:color .3s}
+  .service-card:hover .service-num{color:rgba(255,77,0,.12)}
+  .service-name{font-size:.9rem;font-weight:500;letter-spacing:.06em;margin-bottom:12px}
+  .service-desc{font-size:.82rem;line-height:1.65;color:#666}
+  .service-arrow{position:absolute;bottom:20px;right:24px;color:var(--orange);font-size:1.2rem;opacity:0;transition:opacity .2s,transform .2s}
+  .service-card:hover .service-arrow{opacity:1;transform:translateX(4px)}
+
+
+  /* OUR WORK */
+  .our-work{padding:120px 0 0}
+  .work-grid{display:grid;grid-template-columns:1fr 1fr;gap:2px}
+  .work-card{position:relative;overflow:hidden}
+  .work-thumb{aspect-ratio:16/9;position:relative;overflow:hidden;background:var(--gray2)}
+  .work-video{width:100%;height:100%;object-fit:cover;opacity:.7;transition:opacity .3s}
+  .work-card:hover .work-video{opacity:1}
+  .work-overlay{position:absolute;inset:0;background:linear-gradient(180deg,transparent 40%,rgba(0,0,0,.8) 100%);display:flex;flex-direction:column;justify-content:flex-end;padding:24px;opacity:0;transition:opacity .3s}
+  .work-card:hover .work-overlay{opacity:1}
+  .work-tag{font-size:.65rem;letter-spacing:.18em;text-transform:uppercase;color:var(--orange);margin-bottom:8px}
+  .work-title{font-family:'Bebas Neue',sans-serif;font-size:1.5rem;letter-spacing:.06em;color:var(--white)}
+  .work-placeholder .work-thumb{background:var(--gray2);border:1px dashed rgba(255,255,255,.08)}
+  .work-coming{position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:12px;text-align:center}
+  .work-coming p{font-size:.85rem;color:#444;letter-spacing:.06em}
+  .work-coming a{font-size:.75rem;letter-spacing:.12em;text-transform:uppercase;color:var(--orange);text-decoration:none}
+
+  /* GRADING TEASER */
+  .grading-teaser{padding:0 48px 120px;display:grid;grid-template-columns:1fr 1fr;gap:60px;align-items:center}
+  .grading-teaser-slider{position:relative;aspect-ratio:16/9;overflow:hidden;cursor:ew-resize;border:1px solid rgba(255,255,255,.08);-webkit-user-select:none;-moz-user-select:none;user-select:none;touch-action:none}
+  .grading-teaser-slider img{position:absolute;top:0;left:0;width:100%;height:100%;object-fit:cover;pointer-events:none}
+  .img-after{clip-path:inset(0 50% 0 0)}
+  .divider-line{position:absolute;top:0;left:50%;margin-left:-1px;width:3px;height:100%;background:var(--orange);pointer-events:none;z-index:10}
+  .divider-handle{position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);cursor:ew-resize;width:40px;height:40px;border-radius:50%;background:var(--orange);display:flex;align-items:center;justify-content:center;pointer-events:none;box-shadow:0 0 16px rgba(255,77,0,.5)}
+  .divider-handle svg{width:18px;height:18px}
+  .slide-label{position:absolute;bottom:12px;font-family:'Bebas Neue',sans-serif;font-size:.9rem;letter-spacing:.14em;padding:5px 12px;background:rgba(0,0,0,.7);backdrop-filter:blur(8px);pointer-events:none;z-index:5}
+  .slide-before{left:12px;color:#888}
+  .slide-after{right:12px;color:var(--orange)}
+  .slider-hint{margin-top:10px;font-size:.72rem;color:#444;letter-spacing:.1em;text-transform:uppercase;text-align:center}
+  .grading-copy .section-title{margin-bottom:20px}
+  .grading-copy p{font-size:.9rem;line-height:1.75;color:#777;margin-bottom:32px}
+
+  /* EDITING IMAGE BANNER */
+  .editing-banner{position:relative;height:400px;overflow:hidden;margin-bottom:0}
+  .editing-banner img{width:100%;height:100%;object-fit:cover;opacity:.5}
+  .editing-banner-overlay{position:absolute;inset:0;background:linear-gradient(180deg,var(--black) 0%,transparent 30%,transparent 70%,var(--black) 100%)}
+  .editing-banner-text{position:absolute;bottom:60px;left:48px}
+  .editing-banner-text h2{font-family:'Bebas Neue',sans-serif;font-size:clamp(3rem,6vw,6rem);line-height:.9;color:var(--white)}
+  .editing-banner-text h2 span{color:var(--orange)}
+
+  /* PRICING */
+  .pricing{padding:120px 48px;background:var(--gray2)}
+  .pricing-header{text-align:center;margin-bottom:64px}
+  .pricing-grid{display:grid;grid-template-columns:1fr 1fr 1fr;gap:2px;max-width:1100px;margin:0 auto}
+  .pricing-card{padding:48px 40px;background:var(--black);position:relative}
+  .pricing-card.featured{background:#111;border-top:3px solid var(--orange)}
+  .featured-badge{position:absolute;top:-1px;left:50%;transform:translateX(-50%);background:var(--orange);color:white;font-family:'Bebas Neue',sans-serif;font-size:.8rem;letter-spacing:.14em;padding:4px 16px}
+  .pricing-name{font-family:'Bebas Neue',sans-serif;font-size:1.5rem;letter-spacing:.1em;margin-bottom:8px;color:var(--white)}
+  .pricing-price{font-family:'Bebas Neue',sans-serif;font-size:3.5rem;color:var(--orange);line-height:1;margin-bottom:4px}
+  .pricing-per{font-size:.75rem;color:#555;letter-spacing:.1em;text-transform:uppercase;margin-bottom:32px}
+  .pricing-features{list-style:none;display:flex;flex-direction:column;gap:12px;margin-bottom:40px}
+  .pricing-features li{font-size:.82rem;color:#888;padding-left:20px;position:relative;line-height:1.5}
+  .pricing-features li::before{content:'✓';position:absolute;left:0;color:var(--orange);font-weight:500}
+  .pricing-features li.dim{color:#444}
+  .pricing-features li.dim::before{content:'—';color:#333}
+  .pricing-cta{display:block;text-align:center;padding:12px;font-family:'Bebas Neue',sans-serif;font-size:1rem;letter-spacing:.14em;text-decoration:none;border:1px solid rgba(255,255,255,.15);color:var(--white);transition:all .2s}
+  .pricing-cta:hover,.pricing-card.featured .pricing-cta{background:var(--orange);border-color:var(--orange);color:white}
+  .pricing-note{text-align:center;margin-top:32px;font-size:.78rem;color:#555}
+
+  /* FAQ */
+  .faq{padding:120px 48px;max-width:800px;margin:0 auto}
+  .faq-header{margin-bottom:60px}
+  .faq-item{border-bottom:1px solid rgba(255,255,255,.07);overflow:hidden}
+  .faq-question{width:100%;text-align:left;background:none;border:none;color:var(--white);font-family:'DM Sans',sans-serif;font-size:.95rem;font-weight:400;padding:24px 0;cursor:pointer;display:flex;justify-content:space-between;align-items:center;letter-spacing:.02em}
+  .faq-question:hover{color:var(--orange)}
+  .faq-icon{font-size:1.2rem;color:var(--orange);transition:transform .3s;flex-shrink:0;margin-left:20px}
+  .faq-answer{max-height:0;overflow:hidden;transition:max-height .3s ease,padding .3s}
+  .faq-answer p{font-size:.88rem;color:#777;line-height:1.8;padding-bottom:20px}
+  .faq-item.open .faq-icon{transform:rotate(45deg)}
+  .faq-item.open .faq-answer{max-height:200px}
+
+  /* PROCESS */
+  .process{padding:0 48px 120px;display:grid;grid-template-columns:repeat(4,1fr);gap:2px;border-top:1px solid rgba(255,255,255,.05)}
+  .step{padding:48px 36px;position:relative}
+  .step::after{content:'→';position:absolute;right:0;top:50%;transform:translateY(-50%);color:rgba(255,255,255,.08);font-size:1.5rem}
+  .step:last-child::after{display:none}
+  .step-num{font-family:'Bebas Neue',sans-serif;font-size:4rem;color:var(--orange);line-height:1;margin-bottom:16px}
+  .step-title{font-size:.9rem;font-weight:500;margin-bottom:10px;letter-spacing:.04em}
+  .step-text{font-size:.8rem;color:#666;line-height:1.6}
+
+  /* EARLY ACCESS (replaces testimonials) */
+  .early-access{padding:100px 48px;background:var(--gray2);text-align:center}
+  .early-access h2{font-family:'Bebas Neue',sans-serif;font-size:clamp(3rem,6vw,6rem);line-height:.95;margin-bottom:24px}
+  .early-access h2 span{color:var(--orange)}
+  .early-access p{font-size:1rem;color:#777;max-width:500px;margin:0 auto 40px;line-height:1.7}
+  .early-access a{display:inline-block;background:var(--orange);color:white;font-family:'Bebas Neue',sans-serif;font-size:1.1rem;letter-spacing:.14em;padding:16px 40px;text-decoration:none;transition:background .2s}
+  .early-access a:hover{background:var(--orange-dim)}
+  .early-spots{margin-top:20px;font-size:.75rem;color:#444;letter-spacing:.1em;text-transform:uppercase}
+
+  /* CONTACT */
+  .contact-section{scroll-margin-top:80px;margin:0 48px 120px;background:var(--cream);color:var(--black);padding:80px;position:relative;overflow:hidden}
+  .contact-section::before{content:'START';position:absolute;right:-20px;top:-30px;font-family:'Bebas Neue',sans-serif;font-size:22rem;color:rgba(0,0,0,.04);line-height:1;pointer-events:none}
+  .contact-inner{display:grid;grid-template-columns:1fr 1fr;gap:80px;align-items:center;position:relative;z-index:1}
+  .contact-copy .section-label{color:var(--orange-dim)}
+  .contact-copy .section-title{color:var(--black)}
+  .contact-copy p{margin-top:24px;font-size:.9rem;line-height:1.75;color:#555;max-width:380px}
+  .perks{margin-top:32px;display:flex;flex-direction:column;gap:10px}
+  .perk{display:flex;align-items:center;gap:12px;font-size:.82rem;color:#333}
+  .perk::before{content:'';width:6px;height:6px;border-radius:50%;background:var(--orange);flex-shrink:0}
+  .contact-form{display:flex;flex-direction:column;gap:16px}
+  .field-wrap{display:flex;flex-direction:column;gap:6px}
+  .field-wrap label{font-size:.72rem;letter-spacing:.16em;text-transform:uppercase;color:#888}
+  .field-wrap input,.field-wrap select,.field-wrap textarea{background:white;border:1.5px solid #ddd;padding:14px 18px;font-family:'DM Sans',sans-serif;font-size:.88rem;color:var(--black);outline:none;transition:border-color .2s;-webkit-appearance:none;border-radius:0;resize:none}
+  .field-wrap input:focus,.field-wrap select:focus,.field-wrap textarea:focus{border-color:var(--orange)}
+  .submit-btn{margin-top:8px;background:var(--orange);color:white;border:none;padding:16px 32px;font-family:'Bebas Neue',sans-serif;font-size:1.1rem;letter-spacing:.14em;cursor:pointer;transition:background .2s;width:100%}
+  .submit-btn:hover{background:var(--orange-dim)}
+  .submit-btn:disabled{opacity:.6;cursor:not-allowed}
+  .form-note{font-size:.72rem;color:#aaa;text-align:center}
+  .success-msg{display:none;text-align:center;padding:40px;background:var(--black);color:var(--white)}
+  .success-msg.show{display:block}
+  .success-icon{font-size:3rem;margin-bottom:16px}
+  .success-msg h3{font-family:'Bebas Neue',sans-serif;font-size:2.5rem;letter-spacing:.06em;color:var(--orange);margin-bottom:12px}
+  .success-msg p{font-size:.9rem;color:#aaa;line-height:1.6}
+
+  /* FOOTER */
+  footer{border-top:1px solid rgba(255,255,255,.06);padding:48px 48px 32px;display:grid;grid-template-columns:2fr 1fr 1fr 1fr;gap:40px}
+  .footer-brand .logo{font-size:2rem;display:block;margin-bottom:16px}
+  .footer-brand p{font-size:.82rem;color:#555;line-height:1.7;max-width:240px}
+  .footer-col h4{font-family:'Bebas Neue',sans-serif;font-size:1rem;letter-spacing:.14em;color:#666;margin-bottom:16px}
+  .footer-col a{display:block;font-size:.82rem;color:#555;text-decoration:none;margin-bottom:8px;transition:color .2s}
+  .footer-col a:hover{color:var(--orange)}
+  .footer-bottom{border-top:1px solid rgba(255,255,255,.05);padding:20px 48px;display:flex;justify-content:space-between;font-size:.72rem;color:#333}
+  .footer-bottom a{color:#444;text-decoration:none}
+  .footer-bottom a:hover{color:var(--orange)}
+
+  @keyframes fadeUp{from{opacity:0;transform:translateY(24px)}to{opacity:1;transform:translateY(0)}}
+
+  @media(max-width:900px){
+    nav{padding:20px 24px}.nav-links{display:none}
+    .hero{grid-template-columns:1fr}.hero-right{display:none}.hero-left{padding:120px 24px 60px}
+    .hero-stats{gap:24px}
+    .services{grid-template-columns:1fr;padding:80px 24px;gap:40px}.services-grid{grid-template-columns:1fr}
+    .grading-teaser{grid-template-columns:1fr;padding:0 24px 80px;gap:40px}
+    .editing-banner-text{left:24px}
+    .pricing{padding:80px 24px}.pricing-grid{grid-template-columns:1fr}
+    .faq{padding:80px 24px}
+    .process{grid-template-columns:1fr 1fr;padding:0 24px 80px}
+    .early-access{padding:80px 24px}
+    .contact-section{margin:0 24px 80px;padding:40px 24px}.contact-inner{grid-template-columns:1fr;gap:40px}
+    footer{padding:40px 24px;grid-template-columns:1fr 1fr}
+    .footer-bottom{padding:16px 24px;flex-direction:column;gap:8px}
+  }
+</style>
+</head>
+<body>
+
+<nav>
+  <a class="logo" href="#">CUT<span>LAB</span></a>
+    <div class="nav-links">
+    <a href="index.html" class="active">Home</a>
+    <a href="services.html">Services</a>
+    <a href="team.html">Our Team</a>
+    <a href="careers.html">Careers</a>
+    <a href="index.html#contact">Contact</a>
+  </div>
+  <a class="cta-sm" href="#contact">Get Started</a>
+</nav>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="hero-left">
+    <p class="eyebrow">Professional Video Editing Studio</p>
+    <h1>YOUR FOOTAGE.<span class="accent">OUR CUTS.</span>THEIR ATTENTION.</h1>
+    <p class="hero-sub">CutLab is a dedicated video editing service for creators, brands, and agencies who need cinematic results — fast, reliable, and on brief.</p>
+    <div class="hero-cta">
+      <a href="#contact" class="btn-primary">GET STARTED &rarr;</a>
+      <a href="services.html" class="btn-secondary">See our work</a>
+    </div>
+    <div class="hero-stats">
+      <div><div class="stat-num">48H*</div><div class="stat-label">First Draft</div></div>
+      <div><div class="stat-num">∞*</div><div class="stat-label">Revisions</div></div>
+      <div><div class="stat-num">4+</div><div class="stat-label">Formats</div></div>
+    </div>
+    <p style="margin-top:16px;font-size:.65rem;color:#444;line-height:1.6;max-width:420px">*48h delivery applies to standard projects up to 20 min. Unlimited revisions subject to fair use — we reserve the right to limit excessive requests. Final delivery times may vary based on project complexity and current workload.</p>
+  </div>
+  <div class="hero-right">
+    <div class="reel-stack">
+      <div class="reel-frame"><div class="bar"></div><div class="bar-thin"></div><div class="reel-inner"><div class="thumb"></div><div class="thumb"></div><div class="thumb"></div><div class="thumb"></div><div class="thumb"></div><div class="thumb"></div></div></div>
+      <div class="reel-frame"><div class="bar"></div><div class="bar-thin"></div><div class="reel-inner"><div class="thumb"></div><div class="thumb"></div><div class="thumb"></div></div></div>
+      <div class="reel-frame"><div class="bar"></div><div class="bar-thin"></div><div class="reel-inner"><div class="thumb"></div><div class="thumb"></div><div class="thumb"></div><div class="thumb"></div><div class="thumb"></div><div class="thumb"></div></div><div class="scanline"></div></div>
+    </div>
+  </div>
+</section>
+
+<!-- MARQUEE -->
+<div class="marquee-wrap">
+  <div class="marquee-track">
+    <span>YouTube Videos</span><span class="hi">✦</span><span>Short Films</span><span class="hi">✦</span><span>Brand Campaigns</span><span class="hi">✦</span><span>Reels &amp; TikTok</span><span class="hi">✦</span><span>Content Creators</span><span class="hi">✦</span><span>Motion Graphics</span><span class="hi">✦</span><span>Colour Grading</span><span class="hi">✦</span><span>Podcast Edits</span><span class="hi">✦</span>
+    <span>YouTube Videos</span><span class="hi">✦</span><span>Short Films</span><span class="hi">✦</span><span>Brand Campaigns</span><span class="hi">✦</span><span>Reels &amp; TikTok</span><span class="hi">✦</span><span>Content Creators</span><span class="hi">✦</span><span>Motion Graphics</span><span class="hi">✦</span><span>Colour Grading</span><span class="hi">✦</span><span>Podcast Edits</span><span class="hi">✦</span>
+  </div>
+</div>
+
+<!-- SERVICES -->
+<section class="services">
+  <div>
+    <p class="section-label">What We Do</p>
+    <h2 class="section-title">EVERY FORMAT. EVERY FRAME.</h2>
+    <p style="margin-top:20px;font-size:.85rem;color:#555;line-height:1.7">Click any service to see details and examples.</p>
+  </div>
+  <div class="services-grid">
+    <a class="service-card" href="services.html#youtube"><div class="service-num">01</div><div class="service-name">YouTube &amp; Long-Form</div><p class="service-desc">Full edits for YouTubers — cuts, chapters, B-roll, sound design, all included.</p><span class="service-arrow">→</span></a>
+    <a class="service-card" href="services.html#shortform"><div class="service-num">02</div><div class="service-name">Reels, Shorts &amp; TikTok</div><p class="service-desc">Hook-driven short-form with captions, music sync, and scroll-stopping pacing.</p><span class="service-arrow">→</span></a>
+    <a class="service-card" href="services.html"><div class="service-num">03</div><div class="service-name">Colour Grading</div><p class="service-desc">Film-grade colour work and custom LUTs that give your content a cinematic look.</p><span class="service-arrow">→</span></a>
+    <a class="service-card" href="services.html#motion"><div class="service-num">04</div><div class="service-name">Motion Graphics</div><p class="service-desc">Animated titles, transitions, lower thirds, and full brand motion packages.</p><span class="service-arrow">→</span></a>
+  </div>
+</section>
+
+
+<!-- OUR WORK -->
+<section class="our-work" id="our-work">
+  <div style="padding:0 48px 60px;display:flex;justify-content:space-between;align-items:flex-end">
+    <div>
+      <p class="section-label">Portfolio</p>
+      <h2 class="section-title">OUR WORK.</h2>
+    </div>
+    <p style="font-size:.82rem;color:#555;max-width:300px;text-align:right;line-height:1.6">Real projects. Real results. More coming as we grow.</p>
+  </div>
+  <div class="work-grid">
+    <div class="work-card">
+      <div class="work-thumb">
+        <video class="work-video" src="reel1.mp4" muted loop playsinline></video>
+        <div class="work-overlay">
+          <span class="work-tag">Short-Form</span>
+          <div class="work-title">48H to Cinematic</div>
+        </div>
+      </div>
+    </div>
+    <div class="work-card">
+      <div class="work-thumb">
+        <video class="work-video" src="reel2.mp4" muted loop playsinline></video>
+        <div class="work-overlay">
+          <span class="work-tag">Brand Campaign</span>
+          <div class="work-title">Innovation at Speed</div>
+        </div>
+      </div>
+    </div>
+    <div class="work-card work-placeholder">
+      <div class="work-thumb">
+        <div class="work-coming">
+          <span style="font-size:2rem;opacity:.3">🎬</span>
+          <p>Your project here</p>
+          <a href="#contact">Get Started →</a>
+        </div>
+      </div>
+    </div>
+    <div class="work-card work-placeholder">
+      <div class="work-thumb">
+        <div class="work-coming">
+          <span style="font-size:2rem;opacity:.3">✦</span>
+          <p>Coming Soon</p>
+          <span style="font-size:.72rem;color:#333;letter-spacing:.1em;text-transform:uppercase">First video free</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- GRADING TEASER -->
+<section class="grading-teaser">
+  <div class="grading-copy">
+    <p class="section-label">Colour Grading</p>
+    <h2 class="section-title">RAW TO CINEMATIC.</h2>
+    <p>See what professional colour grading does to your footage. Drag the slider to compare before and after.</p>
+    <a href="services.html" class="btn-primary" style="font-family:'Bebas Neue',sans-serif;font-size:1rem;letter-spacing:.14em;padding:12px 28px;">SEE FULL SERVICES &rarr;</a>
+  </div>
+  <div>
+    <div class="grading-teaser-slider" id="slider">
+      <img loading="lazy" src="before.jpg" alt="Before" />
+      <img src="after.jpg" alt="After" class="img-after" id="afterImg" />
+      <div class="divider-line" id="divider">
+        <div class="divider-handle"><svg viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2.5" stroke-linecap="round"><path d="M8 5l-7 7 7 7M16 5l7 7-7 7"/></svg></div>
+      </div>
+      <span class="slide-label slide-before">BEFORE</span>
+      <span class="slide-label slide-after">AFTER</span>
+    </div>
+    <p class="slider-hint">← Drag to compare →</p>
+  </div>
+</section>
+
+<!-- EDITING IMAGE BANNER -->
+<div class="editing-banner">
+  <img loading="lazy" src="editing.jpg" alt="Professional video editing" />
+  <div class="editing-banner-overlay"></div>
+  <div class="editing-banner-text">
+    <h2>FRAME BY FRAME.<span style="display:block">PIXEL <span style="color:var(--orange)">PERFECT.</span></span></h2>
+  </div>
+</div>
+
+<!-- PROCESS -->
+<section class="process">
+  <div class="step"><div class="step-num">01</div><div class="step-title">Send Your Footage</div><p class="step-text">Upload your raw files via Google Drive or WeTransfer. Any format, any camera.</p></div>
+  <div class="step"><div class="step-num">02</div><div class="step-title">Brief &amp; Direction</div><p class="step-text">Fill in a short creative brief — tone, pacing, references. Five minutes, max.</p></div>
+  <div class="step"><div class="step-num">03</div><div class="step-title">We Edit</div><p class="step-text">Your dedicated editor cuts, grades, and refines your video to brief.</p></div>
+  <div class="step"><div class="step-num">04</div><div class="step-title">Delivered</div><p class="step-text">First draft within 48 hours. Revisions included. Export-ready files delivered.</p></div>
+</section>
+
+<!-- PRICING -->
+<section class="pricing" id="pricing" style="scroll-margin-top:80px">
+  <div class="pricing-header">
+    <p class="section-label" style="text-align:center">Pricing</p>
+    <h2 class="section-title" style="text-align:center">SIMPLE. TRANSPARENT.</h2>
+  </div>
+  <div class="pricing-grid">
+    <div class="pricing-card">
+      <div class="pricing-name">Starter</div>
+      <div class="pricing-price">€299</div>
+      <div class="pricing-per">per month</div>
+      <ul class="pricing-features">
+        <li>4 videos / month</li>
+        <li>Up to 10 min each</li>
+        <li>Colour grading included</li>
+        <li>2 revisions per video</li>
+        <li>48h delivery</li>
+        <li>Basic Motion Graphics</li>
+        <li class="dim">Dedicated editor</li>
+      </ul>
+      <a href="#contact" class="pricing-cta">GET STARTED</a>
+    </div>
+    <div class="pricing-card featured">
+      <div class="featured-badge">MOST POPULAR</div>
+      <div class="pricing-name">Pro</div>
+      <div class="pricing-price">€599</div>
+      <div class="pricing-per">per month</div>
+      <ul class="pricing-features">
+        <li>10 videos / month</li>
+        <li>Up to 30 min each</li>
+        <li>Colour grading included</li>
+        <li>Unlimited revisions</li>
+        <li>24h priority delivery</li>
+        <li>Advanced Motion Graphics</li>
+        <li>Dedicated editor</li>
+      </ul>
+      <a href="#contact" class="pricing-cta">GET STARTED</a>
+    </div>
+    <div class="pricing-card">
+      <div class="pricing-name">Agency</div>
+      <div class="pricing-price">Custom</div>
+      <div class="pricing-per">tailored for you</div>
+      <ul class="pricing-features">
+        <li>Unlimited videos</li>
+        <li>Any length</li>
+        <li>Full colour suite</li>
+        <li>Unlimited revisions</li>
+        <li>Same-day delivery</li>
+        <li>Full motion package</li>
+        <li>Multiple editors</li>
+      </ul>
+      <a href="#contact" class="pricing-cta">LET'S TALK</a>
+    </div>
+  </div>
+  <p class="pricing-note" style="margin-bottom:16px">All prices are starting prices. Final pricing depends on scope. <a href="#contact" style="color:var(--orange);text-decoration:none">Get a custom quote →</a></p>
+  <p class="pricing-note" style="background:rgba(255,77,0,.08);border:1px solid rgba(255,77,0,.2);padding:16px 24px;color:var(--orange);font-size:.82rem;max-width:500px;margin:0 auto">🎬 <strong>First video free</strong> — send us your footage, we edit it at no cost. If you love it, we talk packages.</p>
+</section>
+
+<!-- EARLY ACCESS -->
+<section class="early-access">
+  <p class="section-label">Limited Spots</p>
+  <h2>BE ONE OF OUR<span style="display:block">FIRST <span>CLIENTS.</span></span></h2>
+  <p>CutLab is just getting started. Join early and get direct access to our team, priority attention, and founding member pricing — locked in for life.</p>
+  <a href="#contact">CLAIM YOUR SPOT &rarr;</a>
+  <p class="early-spots">⬤ A few spots still available</p>
+</section>
+
+<!-- CONTACT -->
+<section class="contact-section" id="contact">
+  <div class="contact-inner">
+    <div class="contact-copy">
+      <p class="section-label">Work With Us</p>
+      <h2 class="section-title">LET'S GET TO WORK.</h2>
+      <p>Tell us about your project and we'll get back to you within 24 hours with a tailored offer.</p>
+      <div class="perks">
+        <div class="perk">YouTube, Reels, TikTok &amp; more</div>
+        <div class="perk">Dedicated editor for your channel</div>
+        <div class="perk">First draft within 48 hours</div>
+        <div class="perk">Revisions always included</div>
+      </div>
+    </div>
+    <div>
+      <form class="contact-form" id="contact-form" name="cutlab-contact" method="POST" data-netlify="true" onsubmit="handleSubmit(event)">
+        <input type="hidden" name="form-name" value="cutlab-contact" />
+        <div class="field-wrap"><label>Your Name</label><input type="text" name="name" placeholder="Max Müller" required /></div>
+        <div class="field-wrap"><label>Email Address</label><input type="email" name="email" placeholder="max@studio.com" required /></div>
+        <div class="field-wrap"><label>What do you need?</label>
+          <select name="service" required>
+            <option value="">— Select —</option>
+            <option>YouTube Video Editing</option>
+            <option>Reels / TikTok / Shorts</option>
+            <option>Colour Grading</option>
+            <option>Motion Graphics</option>
+            <option>Full Package</option>
+            <option>Other</option>
+          </select>
+        </div>
+        <div class="field-wrap"><label>Tell us about your project</label><textarea name="message" rows="3" placeholder="Channel size, frequency, style references..."></textarea></div>
+        <button type="submit" class="submit-btn">SEND MY REQUEST &rarr;</button>
+        <p class="form-note">We reply within 24 hours. No commitment needed.</p>
+      </form>
+      <div class="success-msg" id="contact-success">
+        <div class="success-icon">🎬</div>
+        <h3>MESSAGE RECEIVED.</h3>
+        <p>We'll review your project and get back to you within 24 hours.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FAQ -->
+<section class="faq" id="faq" style="scroll-margin-top:80px">
+  <div class="faq-header">
+    <p class="section-label">FAQ</p>
+    <h2 class="section-title">QUESTIONS ANSWERED.</h2>
+  </div>
+  <div class="faq-item">
+    <button class="faq-question">How do I send you my footage?<span class="faq-icon">+</span></button>
+    <div class="faq-answer"><p>You simply upload your raw files to a shared Google Drive or WeTransfer link that we provide. We accept any format — MP4, MOV, MXF, RAW — from any camera.</p></div>
+  </div>
+  <div class="faq-item">
+    <button class="faq-question">How long does editing take?<span class="faq-icon">+</span></button>
+    <div class="faq-answer"><p>First drafts are delivered within 48 hours for standard projects. Pro and Agency clients get 24h priority delivery. Rush same-day delivery is available on request.</p></div>
+  </div>
+  <div class="faq-item">
+    <button class="faq-question">Do I always get the same editor?<span class="faq-icon">+</span></button>
+    <div class="faq-answer"><p>Yes — Pro and Agency clients get a dedicated editor assigned to their channel. This means consistent style, faster turnaround over time, and an editor who really understands your content.</p></div>
+  </div>
+  <div class="faq-item">
+    <button class="faq-question">How many revisions do I get?<span class="faq-icon">+</span></button>
+    <div class="faq-answer"><p>Starter clients get 2 revisions per video. Pro and Agency clients get unlimited revisions — we keep working until you're completely happy with the result.</p></div>
+  </div>
+  <div class="faq-item">
+    <button class="faq-question">What formats do you deliver in?<span class="faq-icon">+</span></button>
+    <div class="faq-answer"><p>We deliver in any format you need — YouTube-optimized MP4, vertical 9:16 for Reels/TikTok, square 1:1, or any custom resolution. Just let us know what platform you're posting to.</p></div>
+  </div>
+  <div class="faq-item">
+    <button class="faq-question">Can I cancel anytime?<span class="faq-icon">+</span></button>
+    <div class="faq-answer"><p>Yes, all plans are monthly with no long-term commitment. Cancel anytime with 30 days notice. No hidden fees, no penalties.</p></div>
+  </div>
+</section>
+
+
+<!-- JOIN TEAM SUBTLE -->
+<div style="text-align:center;padding:48px;border-top:1px solid rgba(255,255,255,.05)">
+  <p style="font-size:.72rem;letter-spacing:.2em;text-transform:uppercase;color:#444;margin-bottom:12px">We're growing</p>
+  <p style="font-family:'Bebas Neue',sans-serif;font-size:1.8rem;letter-spacing:.06em;color:#333">WANT TO EDIT WITH US? <a href="careers.html" style="color:var(--orange);text-decoration:none">JOIN THE TEAM &rarr;</a></p>
+</div>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-brand">
+    <a class="logo" href="#">CUT<span style="color:var(--orange)">LAB</span></a>
+    <p>Professional video editing for creators, brands, and agencies worldwide.</p>
+  </div>
+  <div class="footer-col">
+    <h4>Services</h4>
+    <a href="services.html#youtube">YouTube Editing</a>
+    <a href="services.html#shortform">Reels &amp; Shorts</a>
+    <a href="services.html">Colour Grading</a>
+    <a href="services.html#motion">Motion Graphics</a>
+  </div>
+  <div class="footer-col">
+    <h4>Company</h4>
+    <a href="services.html">Our Work</a>
+    <a href="#pricing">Pricing</a>
+    <a href="#faq">FAQ</a>
+    <a href="team.html">Our Team</a>
+    <a href="careers.html">Work With Us</a>
+    <a href="impressum.html">Impressum</a>
+  </div>
+  <div class="footer-col">
+    <h4>Contact</h4>
+    <a href="/cdn-cgi/l/email-protection#5139343d3d3e113224253d30337f22252435383e"><span class="__cf_email__" data-cfemail="38505d545457785b4d4c54595a164b4c4d5c5157">[email&#160;protected]</span></a>
+    <a href="#contact">Start a Project</a>
+  </div>
+</footer>
+<div class="footer-bottom">
+  <span>&copy; 2026 CutLab. All rights reserved.</span>
+  <a href="impressum.html">Impressum</a> &bull; <a href="datenschutz.html" style="color:var(--orange)">Datenschutz</a>
+</div>
+
+<script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script>
+async function handleSubmit(e){
+  e.preventDefault();
+  var form=document.getElementById('contact-form'),btn=form.querySelector('.submit-btn');
+  btn.textContent='SENDING...';btn.disabled=true;
+  try{
+    var res=await fetch('/',{method:'POST',headers:{'Content-Type':'application/x-www-form-urlencoded'},body:new URLSearchParams(new FormData(form)).toString()});
+    if(res.ok){form.style.display='none';document.getElementById('contact-success').classList.add('show');}
+    else{alert('Something went wrong.');btn.textContent='SEND MY REQUEST';btn.disabled=false;}
+  }catch(err){alert('Connection error.');btn.textContent='SEND MY REQUEST';btn.disabled=false;}
+}
+// Slider - final fix
+(function() {
+  function initSlider(containerId, afterId, dividerId) {
+    var el = document.getElementById(containerId);
+    var after = document.getElementById(afterId);
+    var div = document.getElementById(dividerId);
+    if (!el || !after || !div) return;
+    var active = false;
+    function update(x) {
+      var r = el.getBoundingClientRect();
+      var p = Math.min(Math.max((x - r.left) / r.width, 0.02), 0.98);
+      after.style.clipPath = 'inset(0 ' + ((1-p)*100).toFixed(2) + '% 0 0)';
+      div.style.left = (p*100).toFixed(2) + '%';
+      div.style.transform = 'none';
+    }
+    el.addEventListener('mousedown', function(e) { active=true; update(e.clientX); e.preventDefault(); });
+    window.addEventListener('mousemove', function(e) { if(active) update(e.clientX); });
+    window.addEventListener('mouseup', function() { active=false; });
+    el.addEventListener('touchstart', function(e) { active=true; update(e.touches[0].clientX); }, {passive:false});
+    window.addEventListener('touchmove', function(e) { if(active) { e.preventDefault(); update(e.touches[0].clientX); } }, {passive:false});
+    window.addEventListener('touchend', function() { active=false; });
+  }
+  initSlider('slider','afterImg','divider');
+})();
+
+// Work grid video hover
+document.querySelectorAll('.work-card:not(.work-placeholder)').forEach(function(card) {
+  var video = card.querySelector('.work-video');
+  if (!video) return;
+  card.addEventListener('mouseenter', function() { video.play(); });
+  card.addEventListener('mouseleave', function() { video.pause(); video.currentTime = 0; });
+});
+// FAQ
+document.querySelectorAll('.faq-question').forEach(function(btn){
+  btn.addEventListener('click',function(){
+    var item=this.closest('.faq-item'),isOpen=item.classList.contains('open');
+    document.querySelectorAll('.faq-item').forEach(function(i){i.classList.remove('open');});
+    if(!isOpen)item.classList.add('open');
+  });
+});
+// Animations
+var obs=new IntersectionObserver(function(entries){entries.forEach(function(e,i){if(e.isIntersecting){
