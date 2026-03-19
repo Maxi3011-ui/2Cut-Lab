@@ -1,0 +1,173 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>CutLab — Our Team</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+  :root{--black:#0a0a0a;--white:#f5f0e8;--orange:#ff4d00;--orange-dim:#c93c00;--gray:#2a2a2a;--gray2:#1a1a1a}
+  *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+  html{scroll-behavior:smooth}
+  body{background:var(--black);color:var(--white);font-family:'DM Sans',sans-serif;font-weight:300;overflow-x:hidden;}
+  html{scroll-padding-top:80px} nav{position:fixed;top:0;left:0;right:0;display:flex;align-items:center;justify-content:space-between;padding:20px 48px;z-index:100;background:rgba(10,10,10,.9);backdrop-filter:blur(12px);border-bottom:1px solid rgba(255,255,255,.05)}
+  .logo{font-family:'Bebas Neue',sans-serif;font-size:2rem;letter-spacing:.12em;color:var(--white);text-decoration:none}
+  .logo span{color:var(--orange)}
+  .nav-links{display:flex;align-items:center;gap:32px}
+  .nav-links a{font-size:.78rem;letter-spacing:.14em;text-transform:uppercase;color:#888;text-decoration:none;transition:color .2s}
+  .nav-links a:hover,.nav-links a.active{color:var(--white)}
+  nav a.cta-sm{font-size:.78rem;letter-spacing:.18em;text-transform:uppercase;color:var(--orange);text-decoration:none;border:1px solid var(--orange);padding:8px 20px;transition:background .2s,color .2s}
+  nav a.cta-sm:hover{background:var(--orange);color:var(--black)}
+
+  .page-hero{padding:160px 48px 100px;border-bottom:1px solid rgba(255,255,255,.05)}
+  .eyebrow{font-size:.72rem;letter-spacing:.28em;text-transform:uppercase;color:var(--orange);margin-bottom:20px}
+  h1{font-family:'Bebas Neue',sans-serif;font-size:clamp(4rem,8vw,8rem);line-height:.92;margin-bottom:24px}
+  h1 span{color:var(--orange)}
+  .page-sub{font-size:1rem;line-height:1.75;color:#888;max-width:560px}
+
+  /* TEAM GRID */
+  .team-section{padding:100px 48px}
+  .section-label{font-size:.7rem;letter-spacing:.3em;text-transform:uppercase;color:var(--orange);margin-bottom:20px}
+  .section-title{font-family:'Bebas Neue',sans-serif;font-size:clamp(2.5rem,4vw,4rem);line-height:1;letter-spacing:.04em;margin-bottom:60px}
+
+  .team-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:2px}
+  .hiring-card{display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;padding:48px 24px;background:var(--gray2);text-decoration:none;color:var(--white);transition:background .25s;position:relative;border:1px dashed rgba(255,255,255,.08);min-height:240px}
+  .hiring-card:hover{background:#222;border-color:rgba(255,77,0,.3)}
+  .hiring-card::before{content:'';position:absolute;top:0;left:0;width:3px;height:0;background:var(--orange);transition:height .3s}
+  .hiring-card:hover::before{height:100%}
+  .hiring-icon{font-size:2rem;margin-bottom:16px;opacity:.4}
+  .hiring-role{font-family:'Bebas Neue',sans-serif;font-size:1.1rem;letter-spacing:.06em;margin-bottom:8px}
+  .hiring-tag{font-size:.65rem;letter-spacing:.18em;text-transform:uppercase;color:var(--orange);margin-bottom:16px}
+  .hiring-cta{font-size:.75rem;letter-spacing:.1em;text-transform:uppercase;color:#555;transition:color .2s}
+  .hiring-card:hover .hiring-cta{color:var(--orange)}
+  .hiring-card-special{border-style:solid;border-color:rgba(255,77,0,.15)}
+
+
+  /* MEMBER CARD */
+  .member-card{display:flex;flex-direction:column;align-items:center;text-align:center}
+  .member-img-wrap{position:relative;margin-bottom:24px}
+  .member-img{width:160px;height:160px;border-radius:50%;object-fit:cover;border:2px solid rgba(255,255,255,.08);display:block}
+  .member-placeholder{width:160px;height:160px;border-radius:50%;background:var(--gray2);border:2px dashed rgba(255,255,255,.1);display:flex;align-items:center;justify-content:center;position:relative;overflow:hidden}
+  .member-placeholder::before{content:'';position:absolute;inset:0;background:repeating-linear-gradient(-45deg,transparent,transparent 8px,rgba(255,255,255,.02) 8px,rgba(255,255,255,.02) 9px)}
+  .placeholder-icon{font-size:2.5rem;opacity:.3}
+  .founder-badge{position:absolute;bottom:4px;right:4px;background:var(--orange);color:white;font-family:'Bebas Neue',sans-serif;font-size:.65rem;letter-spacing:.12em;padding:3px 8px;border-radius:20px}
+  .member-name{font-family:'Bebas Neue',sans-serif;font-size:1.3rem;letter-spacing:.06em;margin-bottom:4px}
+  .member-role{font-size:.75rem;letter-spacing:.14em;text-transform:uppercase;color:var(--orange);margin-bottom:12px}
+  .member-bio{font-size:.8rem;line-height:1.65;color:#666;max-width:200px}
+  .member-coming{font-size:.72rem;letter-spacing:.1em;text-transform:uppercase;color:#333;margin-top:12px}
+
+  /* JOIN CTA */
+  .join-cta{padding:100px 48px;background:var(--gray2);text-align:center;border-top:1px solid rgba(255,255,255,.05)}
+  .join-cta h2{font-family:'Bebas Neue',sans-serif;font-size:clamp(3rem,6vw,5rem);line-height:.95;margin-bottom:20px}
+  .join-cta h2 span{color:var(--orange)}
+  .join-cta p{font-size:.9rem;color:#777;max-width:400px;margin:0 auto 32px;line-height:1.7}
+  .join-cta a{display:inline-block;background:var(--orange);color:white;font-family:'Bebas Neue',sans-serif;font-size:1rem;letter-spacing:.14em;padding:14px 36px;text-decoration:none;transition:background .2s}
+  .join-cta a:hover{background:var(--orange-dim)}
+  .launch-note{margin-top:16px;font-size:.72rem;color:#444;letter-spacing:.1em;text-transform:uppercase}
+
+  footer{border-top:1px solid rgba(255,255,255,.06);padding:32px 48px;display:flex;justify-content:space-between;font-size:.75rem;color:#555}
+  footer a{color:var(--orange);text-decoration:none}
+
+  @media(max-width:900px){
+    nav{padding:20px 24px}.nav-links{display:none}
+    .page-hero{padding:120px 24px 60px}
+    .team-section{padding:60px 24px}
+    .team-grid{grid-template-columns:1fr 1fr;gap:32px}
+    .join-cta{padding:60px 24px}
+    footer{padding:24px;flex-direction:column;gap:8px}
+  }
+</style>
+</head>
+<body>
+
+<nav>
+  <a class="logo" href="index.html">CUT<span>LAB</span></a>
+    <div class="nav-links">
+    <a href="index.html">Home</a>
+    <a href="services.html">Services</a>
+    <a href="team.html" class="active">Our Team</a>
+    <a href="careers.html">Careers</a>
+    <a href="index.html#contact">Contact</a>
+  </div>
+  <a class="cta-sm" href="index.html#contact">Get Started</a>
+</nav>
+
+<div class="page-hero">
+  <p class="eyebrow">The People Behind CutLab</p>
+  <h1>OUR <span>TEAM.</span></h1>
+  <p class="page-sub">CutLab is built by editors who care about the craft. We're a small but growing team of freelance professionals dedicated to making your content look its best.</p>
+</div>
+
+<section class="team-section">
+  <p class="section-label">Meet the Team</p>
+  <h2 class="section-title">WHO WE ARE.</h2>
+  <!-- FOUNDER -->
+<div style="padding:0 48px 60px;display:flex;justify-content:center">
+  <div style="text-align:center;max-width:280px">
+    <div style="width:160px;height:160px;border-radius:50%;background:var(--gray2);border:2px dashed rgba(255,77,0,.3);display:flex;align-items:center;justify-content:center;margin:0 auto 24px;position:relative">
+      <span style="font-size:2.5rem;opacity:.3">👤</span>
+      <span style="position:absolute;bottom:4px;right:4px;background:var(--orange);color:white;font-family:'Bebas Neue',sans-serif;font-size:.65rem;letter-spacing:.12em;padding:3px 8px;border-radius:20px">FOUNDER</span>
+    </div>
+    <div style="font-family:'Bebas Neue',sans-serif;font-size:1.3rem;letter-spacing:.06em;margin-bottom:4px">Maximilian Klöckner</div>
+    <div style="font-size:.75rem;letter-spacing:.14em;text-transform:uppercase;color:var(--orange);margin-bottom:12px">Founder &amp; Editor</div>
+    <p style="font-size:.8rem;line-height:1.65;color:#555">Based in Munich. Building CutLab from the ground up — one great edit at a time.</p>
+    <!-- TODO: Replace placeholder with real photo -->
+  </div>
+</div>
+
+<div style="padding:0 48px 20px;border-top:1px solid rgba(255,255,255,.05);padding-top:60px">
+  <p class="section-label">Open Positions</p>
+  <h2 class="section-title" style="margin-bottom:40px">WE'RE HIRING.</h2>
+</div>
+
+<div class="team-grid">
+    <a href="careers.html" class="hiring-card">
+      <div class="hiring-icon">🎬</div>
+      <div class="hiring-role">YouTube &amp; Long-Form Editor</div>
+      <div class="hiring-tag">Starting May 2026</div>
+      <div class="hiring-cta">Apply Now →</div>
+    </a>
+    <a href="careers.html" class="hiring-card">
+      <div class="hiring-icon">✂️</div>
+      <div class="hiring-role">Short-Form Editor</div>
+      <div class="hiring-tag">Starting May 2026</div>
+      <div class="hiring-cta">Apply Now →</div>
+    </a>
+    <a href="careers.html" class="hiring-card">
+      <div class="hiring-icon">✦</div>
+      <div class="hiring-role">Motion Graphics Designer</div>
+      <div class="hiring-tag">Starting May 2026</div>
+      <div class="hiring-cta">Apply Now →</div>
+    </a>
+    <a href="careers.html" class="hiring-card hiring-card-special">
+      <div class="hiring-icon">+</div>
+      <div class="hiring-role">More positions coming</div>
+      <div class="hiring-tag">See all openings</div>
+      <div class="hiring-cta">View Careers →</div>
+    </a>
+  </div>
+
+</section>
+
+<!-- JOIN CTA -->
+<section class="join-cta">
+  <p style="font-size:.72rem;letter-spacing:.2em;text-transform:uppercase;color:#444;margin-bottom:16px">We're hiring</p>
+  <h2>WANT TO BE <span>NEXT?</span></h2>
+  <p>We're looking for talented freelance editors to join the team starting May 2026. Apply now and get onboarded before launch.</p>
+  <a href="careers.html">SEE OPEN POSITIONS &rarr;</a>
+  <p class="launch-note">⬤ Applications open — launching 1st May 2026</p>
+</section>
+
+<footer>
+  <span>&copy; 2026 CutLab. All rights reserved.</span>
+  <div style="display:flex;gap:24px">
+    <a href="index.html">Home</a>
+    <a href="careers.html">Join the Team</a>
+    <a href="impressum.html">Impressum</a>
+  </div>
+</footer>
+
+</body>
+</html>

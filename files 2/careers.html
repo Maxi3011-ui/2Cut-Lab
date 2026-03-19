@@ -1,0 +1,287 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>CutLab — Work With Us</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+  :root{--black:#0a0a0a;--white:#f5f0e8;--cream:#ede8df;--orange:#ff4d00;--orange-dim:#c93c00;--gray:#2a2a2a;--gray2:#1a1a1a}
+  *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+  html{scroll-behavior:smooth}
+  body{background:var(--black);color:var(--white);font-family:'DM Sans',sans-serif;font-weight:300;overflow-x:hidden;}
+  html{scroll-padding-top:80px} nav{position:fixed;top:0;left:0;right:0;display:flex;align-items:center;justify-content:space-between;padding:20px 48px;z-index:100;background:rgba(10,10,10,.9);backdrop-filter:blur(12px);border-bottom:1px solid rgba(255,255,255,.05)}
+  .logo{font-family:'Bebas Neue',sans-serif;font-size:2rem;letter-spacing:.12em;color:var(--white);text-decoration:none}
+  .logo span{color:var(--orange)}
+  .nav-links{display:flex;align-items:center;gap:32px}
+  .nav-links a{font-size:.78rem;letter-spacing:.14em;text-transform:uppercase;color:#888;text-decoration:none;transition:color .2s}
+  .nav-links a:hover,.nav-links a.active{color:var(--white)}
+  nav a.cta-sm{font-size:.78rem;letter-spacing:.18em;text-transform:uppercase;color:var(--orange);text-decoration:none;border:1px solid var(--orange);padding:8px 20px;transition:background .2s,color .2s}
+  nav a.cta-sm:hover{background:var(--orange);color:var(--black)}
+
+  /* HERO */
+  .page-hero{padding:160px 48px 100px;border-bottom:1px solid rgba(255,255,255,.05);position:relative;overflow:hidden}
+  .page-hero::before{content:'HIRE';position:absolute;right:-40px;top:-40px;font-family:'Bebas Neue',sans-serif;font-size:28rem;color:rgba(255,255,255,.02);line-height:1;pointer-events:none}
+  .eyebrow{font-size:.72rem;letter-spacing:.28em;text-transform:uppercase;color:var(--orange);margin-bottom:20px}
+  h1{font-family:'Bebas Neue',sans-serif;font-size:clamp(4rem,8vw,8rem);line-height:.92;color:var(--white);margin-bottom:24px}
+  h1 span{color:var(--orange)}
+  .page-sub{font-size:1rem;line-height:1.75;color:#888;max-width:560px}
+
+  /* PERKS */
+  .perks-section{padding:100px 48px;display:grid;grid-template-columns:1fr 2fr;gap:80px;align-items:start;border-bottom:1px solid rgba(255,255,255,.05)}
+  .section-label{font-size:.7rem;letter-spacing:.3em;text-transform:uppercase;color:var(--orange);margin-bottom:20px}
+  .section-title{font-family:'Bebas Neue',sans-serif;font-size:clamp(2.5rem,4vw,4rem);line-height:1;letter-spacing:.04em}
+  .perks-grid{display:grid;grid-template-columns:1fr 1fr;gap:2px}
+  .perk-card{padding:36px;background:var(--gray2)}
+  .perk-icon{font-size:2rem;margin-bottom:16px}
+  .perk-title{font-family:'Bebas Neue',sans-serif;font-size:1.2rem;letter-spacing:.08em;margin-bottom:10px;color:var(--white)}
+  .perk-desc{font-size:.82rem;line-height:1.65;color:#666}
+
+  /* WHO WE LOOK FOR */
+  .looking-for{padding:100px 48px;background:var(--gray2);border-bottom:1px solid rgba(255,255,255,.05)}
+  .looking-inner{display:grid;grid-template-columns:1fr 1fr;gap:80px;align-items:start}
+  .requirements{display:flex;flex-direction:column;gap:16px;margin-top:32px}
+  .req-item{display:flex;gap:16px;align-items:flex-start}
+  .req-num{font-family:'Bebas Neue',sans-serif;font-size:1.5rem;color:var(--orange);line-height:1;flex-shrink:0;width:32px}
+  .req-text strong{display:block;font-size:.88rem;font-weight:500;margin-bottom:4px;color:var(--white)}
+  .req-text p{font-size:.8rem;color:#666;line-height:1.6}
+  .not-required{margin-top:40px;padding:24px;border:1px solid rgba(255,255,255,.06)}
+  .not-required h4{font-family:'Bebas Neue',sans-serif;font-size:1rem;letter-spacing:.1em;color:#555;margin-bottom:12px}
+  .not-required p{font-size:.82rem;color:#555;line-height:1.6}
+
+  /* ROLES */
+  .roles{padding:100px 48px;border-bottom:1px solid rgba(255,255,255,.05)}
+  .roles-header{margin-bottom:48px}
+  .role-card{padding:40px;background:var(--gray2);margin-bottom:2px;display:grid;grid-template-columns:1fr auto;align-items:center;gap:40px;transition:background .2s}
+  .role-card:hover{background:#222}
+  .role-badge{display:inline-block;font-size:.65rem;letter-spacing:.16em;text-transform:uppercase;border:1px solid rgba(255,77,0,.4);color:var(--orange);padding:3px 10px;margin-bottom:12px}
+  .role-name{font-family:'Bebas Neue',sans-serif;font-size:2rem;letter-spacing:.04em;margin-bottom:8px}
+  .role-desc{font-size:.85rem;color:#777;line-height:1.6;max-width:600px}
+  .role-tags{display:flex;gap:8px;flex-wrap:wrap;margin-top:16px}
+  .role-tag{font-size:.7rem;letter-spacing:.1em;text-transform:uppercase;color:#555;background:rgba(255,255,255,.04);padding:4px 10px}
+  .apply-btn{background:var(--orange);color:white;font-family:'Bebas Neue',sans-serif;font-size:.9rem;letter-spacing:.14em;padding:12px 24px;text-decoration:none;white-space:nowrap;transition:background .2s;flex-shrink:0}
+  .apply-btn:hover{background:var(--orange-dim)}
+
+  /* APPLICATION FORM */
+  .apply-section{margin:0 48px 100px;background:var(--cream);color:var(--black);padding:80px;position:relative;overflow:hidden}
+  .apply-section::before{content:'APPLY';position:absolute;right:-20px;top:-30px;font-family:'Bebas Neue',sans-serif;font-size:18rem;color:rgba(0,0,0,.04);line-height:1;pointer-events:none}
+  .apply-inner{display:grid;grid-template-columns:1fr 1fr;gap:80px;align-items:start;position:relative;z-index:1}
+  .apply-copy .section-label{color:var(--orange-dim)}
+  .apply-copy .section-title{color:var(--black)}
+  .apply-copy p{margin-top:20px;font-size:.9rem;line-height:1.75;color:#555}
+  .apply-copy .disclaimer{margin-top:24px;font-size:.75rem;color:#999;line-height:1.7;padding:16px;border:1px solid #ddd;background:rgba(0,0,0,.03)}
+  .apply-form{display:flex;flex-direction:column;gap:16px}
+  .field-wrap{display:flex;flex-direction:column;gap:6px}
+  .field-wrap label{font-size:.72rem;letter-spacing:.16em;text-transform:uppercase;color:#888}
+  .field-wrap input,.field-wrap select,.field-wrap textarea{background:white;border:1.5px solid #ddd;padding:14px 18px;font-family:'DM Sans',sans-serif;font-size:.88rem;color:var(--black);outline:none;transition:border-color .2s;-webkit-appearance:none;border-radius:0;resize:none}
+  .field-wrap input:focus,.field-wrap select:focus,.field-wrap textarea:focus{border-color:var(--orange)}
+  .submit-btn{margin-top:8px;background:var(--orange);color:white;border:none;padding:16px 32px;font-family:'Bebas Neue',sans-serif;font-size:1.1rem;letter-spacing:.14em;cursor:pointer;transition:background .2s;width:100%}
+  .submit-btn:hover{background:var(--orange-dim)}
+  .submit-btn:disabled{opacity:.6;cursor:not-allowed}
+  .form-note{font-size:.72rem;color:#aaa;text-align:center}
+  .success-msg{display:none;text-align:center;padding:40px;background:var(--black);color:var(--white)}
+  .success-msg.show{display:block}
+  .success-icon{font-size:3rem;margin-bottom:16px}
+  .success-msg h3{font-family:'Bebas Neue',sans-serif;font-size:2.5rem;letter-spacing:.06em;color:var(--orange);margin-bottom:12px}
+  .success-msg p{font-size:.9rem;color:#aaa;line-height:1.6}
+
+  footer{border-top:1px solid rgba(255,255,255,.06);padding:32px 48px;display:flex;justify-content:space-between;font-size:.75rem;color:#555}
+  footer a{color:var(--orange);text-decoration:none}
+
+  @media(max-width:900px){
+    nav{padding:20px 24px}.nav-links{display:none}
+    .page-hero{padding:120px 24px 60px}
+    .perks-section{grid-template-columns:1fr;padding:60px 24px;gap:40px}.perks-grid{grid-template-columns:1fr}
+    .looking-for{padding:60px 24px}.looking-inner{grid-template-columns:1fr}
+    .roles{padding:60px 24px}
+    .role-card{grid-template-columns:1fr;gap:16px}
+    .apply-section{margin:0 24px 60px;padding:40px 24px}.apply-inner{grid-template-columns:1fr;gap:40px}
+    footer{padding:24px;flex-direction:column;gap:8px}
+  }
+</style>
+</head>
+<body>
+
+<nav>
+  <a class="logo" href="index.html">CUT<span>LAB</span></a>
+    <div class="nav-links">
+    <a href="index.html">Home</a>
+    <a href="services.html">Services</a>
+    <a href="team.html">Our Team</a>
+    <a href="careers.html" class="active">Careers</a>
+    <a href="index.html#contact">Contact</a>
+  </div>
+  <a class="cta-sm" href="#apply">Apply Now</a>
+</nav>
+
+<!-- HERO -->
+<div class="page-hero">
+  <p class="eyebrow">Join the Team</p>
+  <h1>EDIT WITH <span>CUTLAB.</span></h1>
+  <p class="page-sub">We're building a team of talented freelance video editors launching <strong style="color:var(--orange)">1st May 2026</strong>. Apply now, get onboarded early, and be ready to take on your first projects from day one.</p>
+</div>
+
+<!-- PERKS -->
+<section class="perks-section">
+  <div>
+    <p class="section-label">Why CutLab</p>
+    <h2 class="section-title">WHAT'S IN IT FOR YOU.</h2>
+  </div>
+  <div class="perks-grid">
+    <div class="perk-card"><div class="perk-icon">💸</div><div class="perk-title">Pay Per Video</div><p class="perk-desc">Get paid for every video you deliver. Clear rates, no surprises, prompt payment.</p></div>
+    <div class="perk-card"><div class="perk-icon">🕐</div><div class="perk-title">Flexible Hours</div><p class="perk-desc">Work when you want, from wherever you want. As long as you hit your deadlines, you're free.</p></div>
+    <div class="perk-card"><div class="perk-icon">📈</div><div class="perk-title">Grow With Us</div><p class="perk-desc">We're just starting. The earlier you join, the more responsibility and earning potential you get.</p></div>
+    <div class="perk-card"><div class="perk-icon">🎬</div><div class="perk-title">Real Projects</div><p class="perk-desc">Work on real client videos across YouTube, TikTok, brands, and agencies — build your portfolio fast.</p></div>
+  </div>
+</section>
+
+<!-- WHO WE LOOK FOR -->
+<section class="looking-for">
+  <div class="looking-inner">
+    <div>
+      <p class="section-label">Requirements</p>
+      <h2 class="section-title">WHO WE'RE LOOKING FOR.</h2>
+      <div class="requirements">
+        <div class="req-item"><div class="req-num">01</div><div class="req-text"><strong>Solid editing skills</strong><p>You know your way around Premiere Pro, DaVinci Resolve, or Final Cut. You can cut clean, pace well, and deliver on brief.</p></div></div>
+        <div class="req-item"><div class="req-num">02</div><div class="req-text"><strong>Reliable & deadline-driven</strong><p>Clients trust us with their deadlines. We need editors who take that seriously and communicate proactively if something comes up.</p></div></div>
+        <div class="req-item"><div class="req-num">03</div><div class="req-text"><strong>Portfolio or examples</strong><p>Show us what you've made — even personal projects, spec work, or student films count. We want to see your eye for editing.</p></div></div>
+        <div class="req-item"><div class="req-num">04</div><div class="req-text"><strong>Good communication</strong><p>You'll work directly with clients and with us. Clear, friendly communication is just as important as editing skill.</p></div></div>
+      </div>
+      <div class="not-required">
+        <h4>Not Required</h4>
+        <p>No degree needed. No specific location. No minimum hours. Experience with motion graphics is a plus but not essential. We train you on our workflow and standards.</p>
+      </div>
+    </div>
+    <div style="padding-top:60px">
+      <div style="background:var(--black);padding:40px;border:1px solid rgba(255,255,255,.06)">
+        <p style="font-family:'Bebas Neue',sans-serif;font-size:3rem;color:var(--orange);line-height:1">FREELANCE</p>
+        <p style="font-size:.82rem;color:#666;line-height:1.7;margin-top:12px">All positions are freelance. You are not an employee of CutLab. You set your own hours and work on a project basis. Rates are agreed per project or per video.</p>
+        <div style="margin-top:32px;display:flex;flex-direction:column;gap:12px">
+          <div style="display:flex;justify-content:space-between;padding-bottom:12px;border-bottom:1px solid rgba(255,255,255,.06)"><span style="font-size:.8rem;color:#666">Contract type</span><span style="font-size:.8rem;color:var(--white)">Freelance</span></div>
+          <div style="display:flex;justify-content:space-between;padding-bottom:12px;border-bottom:1px solid rgba(255,255,255,.06)"><span style="font-size:.8rem;color:#666">Location</span><span style="font-size:.8rem;color:var(--white)">Remote / Worldwide</span></div>
+          <div style="display:flex;justify-content:space-between;padding-bottom:12px;border-bottom:1px solid rgba(255,255,255,.06)"><span style="font-size:.8rem;color:#666">Payment</span><span style="font-size:.8rem;color:var(--white)">Per video / Per project</span></div>
+          <div style="display:flex;justify-content:space-between"><span style="font-size:.8rem;color:#666">Start</span><span style="font-size:.8rem;color:var(--orange)">1. May 2026</span></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- OPEN ROLES -->
+<section class="roles">
+  <div class="roles-header">
+    <p class="section-label">Open Positions</p>
+    <h2 class="section-title">WE'RE HIRING.</h2>
+  </div>
+
+  <div class="role-card">
+    <div>
+      <div class="role-badge">Open</div>
+      <div class="role-name">Video Editor — YouTube & Long-Form</div>
+      <p class="role-desc">Cut full-length YouTube videos for creators. You handle pacing, B-roll, sound, and colour. Consistent style, delivered on time.</p>
+      <div class="role-tags"><span class="role-tag">Premiere / DaVinci</span><span class="role-tag">YouTube</span><span class="role-tag">Freelance</span><span class="role-tag">Remote</span></div>
+    </div>
+    <a href="#apply" class="apply-btn">APPLY NOW</a>
+  </div>
+
+  <div class="role-card">
+    <div>
+      <div class="role-badge">Open</div>
+      <div class="role-name">Short-Form Editor — Reels & TikTok</div>
+      <p class="role-desc">Create scroll-stopping vertical content. You understand hooks, pacing, captions, and trending formats for Instagram and TikTok.</p>
+      <div class="role-tags"><span class="role-tag">CapCut / Premiere</span><span class="role-tag">TikTok / Reels</span><span class="role-tag">Freelance</span><span class="role-tag">Remote</span></div>
+    </div>
+    <a href="#apply" class="apply-btn">APPLY NOW</a>
+  </div>
+
+  <div class="role-card">
+    <div>
+      <div class="role-badge">Starting May 2026</div>
+      <div class="role-name">Motion Graphics Designer</div>
+      <p class="role-desc">Create animated titles, lower thirds, transitions, and icon animations. After Effects or DaVinci Fusion experience preferred.</p>
+      <div class="role-tags"><span class="role-tag">After Effects</span><span class="role-tag">Motion Design</span><span class="role-tag">Freelance</span><span class="role-tag">Remote</span></div>
+    </div>
+    <a href="#apply" class="apply-btn">APPLY NOW</a>
+  </div>
+</section>
+
+<!-- APPLICATION FORM -->
+<section class="apply-section" id="apply">
+  <div class="apply-inner">
+    <div class="apply-copy">
+      <p class="section-label">Apply Now</p>
+      <h2 class="section-title">LET'S WORK TOGETHER.</h2>
+      <p>Send us your details and a link to your work. We review every application personally and get back to you within 3 business days.</p>
+      <div class="disclaimer">
+        <strong style="font-size:.78rem;display:block;margin-bottom:8px">⚠️ Important — Please Read</strong>
+        <p>All work at CutLab is on a freelance basis. By applying you acknowledge that: (1) You are an independent contractor, not an employee. (2) CutLab retains the right to accept or reject any submitted work that does not meet the agreed brief. (3) Payment is made upon delivery and approval of the agreed deliverable. (4) CutLab may end the working relationship at any time if quality standards or deadlines are consistently not met. A formal freelance agreement will be signed before any paid work begins.</p>
+      </div>
+    </div>
+    <div>
+      <form class="apply-form" id="apply-form" name="cutlab-application" method="POST" data-netlify="true" onsubmit="handleApply(event)">
+        <input type="hidden" name="form-name" value="cutlab-application" />
+        <div class="field-wrap"><label>Full Name</label><input type="text" name="name" placeholder="Max Müller" required /></div>
+        <div class="field-wrap"><label>Email Address</label><input type="email" name="email" placeholder="max@editor.com" required /></div>
+        <div class="field-wrap"><label>Which role are you applying for?</label>
+          <select name="role" required>
+            <option value="">— Select —</option>
+            <option>YouTube & Long-Form Editor</option>
+            <option>Short-Form Editor (Reels / TikTok)</option>
+            <option>Motion Graphics Designer</option>
+            <option>Multiple / Other</option>
+          </select>
+        </div>
+        <div class="field-wrap"><label>Software you use</label>
+          <select name="software" required>
+            <option value="">— Select —</option>
+            <option>DaVinci Resolve</option>
+            <option>Adobe Premiere Pro</option>
+            <option>Final Cut Pro</option>
+            <option>After Effects</option>
+            <option>CapCut</option>
+            <option>Multiple</option>
+          </select>
+        </div>
+        <div class="field-wrap"><label>Portfolio / Work Examples (link)</label><input type="url" name="portfolio" placeholder="https://youtube.com/... or drive.google.com/..." /></div>
+        <div class="field-wrap"><label>Tell us about yourself</label><textarea name="message" rows="4" placeholder="Experience, availability, why you want to work with CutLab..." required></textarea></div>
+        <div class="field-wrap" style="flex-direction:row;align-items:flex-start;gap:12px">
+          <input type="checkbox" name="agreement" id="agreement" required style="margin-top:3px;width:auto;flex-shrink:0" />
+          <label for="agreement" style="font-size:.78rem;color:#999;letter-spacing:0;text-transform:none;cursor:pointer">I have read and understood the freelance terms above and agree that this is a freelance arrangement, not an employment contract.</label>
+        </div>
+        <button type="submit" class="submit-btn">SEND APPLICATION &rarr;</button>
+        <p class="form-note">We review every application. You'll hear back within 3 business days.</p>
+      </form>
+      <div class="success-msg" id="apply-success">
+        <div class="success-icon">🎬</div>
+        <h3>APPLICATION RECEIVED.</h3>
+        <p>We'll review your work and get back to you within 3 business days.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <span>&copy; 2026 CutLab. All rights reserved.</span>
+  <div style="display:flex;gap:24px">
+    <a href="index.html">Home</a>
+    <a href="services.html">Services</a>
+    <a href="impressum.html">Impressum</a>
+  </div>
+</footer>
+
+<script>
+async function handleApply(e){
+  e.preventDefault();
+  var form=document.getElementById('apply-form'),btn=form.querySelector('.submit-btn');
+  btn.textContent='SENDING...';btn.disabled=true;
+  try{
+    var res=await fetch('/',{method:'POST',headers:{'Content-Type':'application/x-www-form-urlencoded'},body:new URLSearchParams(new FormData(form)).toString()});
+    if(res.ok){form.style.display='none';document.getElementById('apply-success').classList.add('show');}
+    else{alert('Something went wrong. Please try again.');btn.textContent='SEND APPLICATION';btn.disabled=false;}
+  }catch(err){alert('Connection error.');btn.textContent='SEND APPLICATION';btn.disabled=false;}
+}
+</script>
+</body>
+</html>
