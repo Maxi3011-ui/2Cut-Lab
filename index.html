@@ -82,28 +82,13 @@
   .service-card:hover .service-arrow{opacity:1;transform:translateX(4px)}
 
 
-  /* OUR WORK */
-  .our-work{padding:120px 0 0}
-  .work-grid{display:grid;grid-template-columns:1fr 1fr;gap:2px}
-  .work-card{position:relative;overflow:hidden}
-  .work-thumb{aspect-ratio:16/9;position:relative;overflow:hidden;background:var(--gray2)}
-  .work-video{width:100%;height:100%;object-fit:cover;opacity:.7;transition:opacity .3s}
-  .work-card:hover .work-video{opacity:1}
-  .work-overlay{position:absolute;inset:0;background:linear-gradient(180deg,transparent 40%,rgba(0,0,0,.8) 100%);display:flex;flex-direction:column;justify-content:flex-end;padding:24px;opacity:0;transition:opacity .3s}
-  .work-card:hover .work-overlay{opacity:1}
-  .work-tag{font-size:.65rem;letter-spacing:.18em;text-transform:uppercase;color:var(--orange);margin-bottom:8px}
-  .work-title{font-family:'Bebas Neue',sans-serif;font-size:1.5rem;letter-spacing:.06em;color:var(--white)}
-  .work-placeholder .work-thumb{background:var(--gray2);border:1px dashed rgba(255,255,255,.08)}
-  .work-coming{position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:12px;text-align:center}
-  .work-coming p{font-size:.85rem;color:#444;letter-spacing:.06em}
-  .work-coming a{font-size:.75rem;letter-spacing:.12em;text-transform:uppercase;color:var(--orange);text-decoration:none}
 
   /* GRADING TEASER */
   .grading-teaser{padding:0 48px 120px;display:grid;grid-template-columns:1fr 1fr;gap:60px;align-items:center}
   .grading-teaser-slider{position:relative;aspect-ratio:16/9;overflow:hidden;cursor:ew-resize;border:1px solid rgba(255,255,255,.08);-webkit-user-select:none;-moz-user-select:none;user-select:none;touch-action:none}
   .grading-teaser-slider img{position:absolute;top:0;left:0;width:100%;height:100%;object-fit:cover;pointer-events:none}
   .img-after{clip-path:inset(0 50% 0 0)}
-  .divider-line{position:absolute;top:0;left:50%;margin-left:-1px;width:3px;height:100%;background:var(--orange);pointer-events:none;z-index:10}
+  .divider-line{position:absolute;top:0;left:50%;width:3px;height:100%;background:var(--orange);pointer-events:none;z-index:10;margin-left:-1px}
   .divider-handle{position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);cursor:ew-resize;width:40px;height:40px;border-radius:50%;background:var(--orange);display:flex;align-items:center;justify-content:center;pointer-events:none;box-shadow:0 0 16px rgba(255,77,0,.5)}
   .divider-handle svg{width:18px;height:18px}
   .slide-label{position:absolute;bottom:12px;font-family:'Bebas Neue',sans-serif;font-size:.9rem;letter-spacing:.14em;padding:5px 12px;background:rgba(0,0,0,.7);backdrop-filter:blur(8px);pointer-events:none;z-index:5}
@@ -289,54 +274,6 @@
 </section>
 
 
-<!-- OUR WORK -->
-<section class="our-work" id="our-work">
-  <div style="padding:0 48px 60px;display:flex;justify-content:space-between;align-items:flex-end">
-    <div>
-      <p class="section-label">Portfolio</p>
-      <h2 class="section-title">OUR WORK.</h2>
-    </div>
-    <p style="font-size:.82rem;color:#555;max-width:300px;text-align:right;line-height:1.6">Real projects. Real results. More coming as we grow.</p>
-  </div>
-  <div class="work-grid">
-    <div class="work-card">
-      <div class="work-thumb">
-        <video class="work-video" src="reel1.mp4" muted loop playsinline></video>
-        <div class="work-overlay">
-          <span class="work-tag">Short-Form</span>
-          <div class="work-title">48H to Cinematic</div>
-        </div>
-      </div>
-    </div>
-    <div class="work-card">
-      <div class="work-thumb">
-        <video class="work-video" src="reel2.mp4" muted loop playsinline></video>
-        <div class="work-overlay">
-          <span class="work-tag">Brand Campaign</span>
-          <div class="work-title">Innovation at Speed</div>
-        </div>
-      </div>
-    </div>
-    <div class="work-card work-placeholder">
-      <div class="work-thumb">
-        <div class="work-coming">
-          <span style="font-size:2rem;opacity:.3">🎬</span>
-          <p>Your project here</p>
-          <a href="#contact">Get Started →</a>
-        </div>
-      </div>
-    </div>
-    <div class="work-card work-placeholder">
-      <div class="work-thumb">
-        <div class="work-coming">
-          <span style="font-size:2rem;opacity:.3">✦</span>
-          <p>Coming Soon</p>
-          <span style="font-size:.72rem;color:#333;letter-spacing:.1em;text-transform:uppercase">First video free</span>
-        </div>
-      </div>
-    </div>
-  </div>
-</section>
 
 <!-- GRADING TEASER -->
 <section class="grading-teaser">
@@ -570,38 +507,15 @@ async function handleSubmit(e){
     else{alert('Something went wrong.');btn.textContent='SEND MY REQUEST';btn.disabled=false;}
   }catch(err){alert('Connection error.');btn.textContent='SEND MY REQUEST';btn.disabled=false;}
 }
-// Slider - final fix
-(function() {
-  function initSlider(containerId, afterId, dividerId) {
-    var el = document.getElementById(containerId);
-    var after = document.getElementById(afterId);
-    var div = document.getElementById(dividerId);
-    if (!el || !after || !div) return;
-    var active = false;
-    function update(x) {
-      var r = el.getBoundingClientRect();
-      var p = Math.min(Math.max((x - r.left) / r.width, 0.02), 0.98);
-      after.style.clipPath = 'inset(0 ' + ((1-p)*100).toFixed(2) + '% 0 0)';
-      div.style.left = (p*100).toFixed(2) + '%';
-      div.style.transform = 'none';
-    }
-    el.addEventListener('mousedown', function(e) { active=true; update(e.clientX); e.preventDefault(); });
-    window.addEventListener('mousemove', function(e) { if(active) update(e.clientX); });
-    window.addEventListener('mouseup', function() { active=false; });
-    el.addEventListener('touchstart', function(e) { active=true; update(e.touches[0].clientX); }, {passive:false});
-    window.addEventListener('touchmove', function(e) { if(active) { e.preventDefault(); update(e.touches[0].clientX); } }, {passive:false});
-    window.addEventListener('touchend', function() { active=false; });
-  }
-  initSlider('slider','afterImg','divider');
-})();
-
-// Work grid video hover
-document.querySelectorAll('.work-card:not(.work-placeholder)').forEach(function(card) {
-  var video = card.querySelector('.work-video');
-  if (!video) return;
-  card.addEventListener('mouseenter', function() { video.play(); });
-  card.addEventListener('mouseleave', function() { video.pause(); video.currentTime = 0; });
-});
+// Slider
+var slider=document.getElementById('slider'),afterImg=document.getElementById('afterImg'),divider=document.getElementById('divider'),dragging=false;
+function setPos(x){var r=slider.getBoundingClientRect(),p=Math.min(Math.max((x-r.left)/r.width,0.02),0.98);afterImg.style.clipPath='inset(0 '+((1-p)*100).toFixed(1)+'% 0 0)';divider.style.left=(p*100).toFixed(1)+'%';}
+slider.addEventListener('mousedown',function(e){dragging=true;setPos(e.clientX);});
+window.addEventListener('mousemove',function(e){if(dragging)setPos(e.clientX);});
+window.addEventListener('mouseup',function(){dragging=false;});
+slider.addEventListener('touchstart',function(e){dragging=true;setPos(e.touches[0].clientX);},{passive:true});
+window.addEventListener('touchmove',function(e){if(dragging)setPos(e.touches[0].clientX);},{passive:true});
+window.addEventListener('touchend',function(){dragging=false;});
 // FAQ
 document.querySelectorAll('.faq-question').forEach(function(btn){
   btn.addEventListener('click',function(){
